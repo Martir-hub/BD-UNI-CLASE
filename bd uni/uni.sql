@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 08, 2025 at 08:46 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 09-08-2025 a las 17:24:04
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,35 +18,55 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `uni`
+-- Base de datos: `uni`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `curso`
+-- Estructura de tabla para la tabla `curso`
 --
 
 CREATE TABLE `curso` (
   `ID_Curso` int(11) NOT NULL,
-  `Nombre_curso` varchar(60) DEFAULT NULL
+  `Nombre_curso` varchar(60) DEFAULT NULL,
+  `creditos` varchar(3) DEFAULT NULL,
+  `descripcion` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `curso`
+--
+
+INSERT INTO `curso` (`ID_Curso`, `Nombre_curso`, `creditos`, `descripcion`) VALUES
+(1, 'Programación', '3', 'Curso de programacion.'),
+(2, 'Matemáticas', '4', 'curso de matematicas.');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estudiante`
+-- Estructura de tabla para la tabla `estudiante`
 --
 
 CREATE TABLE `estudiante` (
   `ID_Std` int(11) NOT NULL,
-  `Nombres` varchar(60) DEFAULT NULL
+  `Nombres` varchar(60) DEFAULT NULL,
+  `Apellidos` varchar(60) DEFAULT NULL,
+  `fecha_n` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `estudiante`
+--
+
+INSERT INTO `estudiante` (`ID_Std`, `Nombres`, `Apellidos`, `fecha_n`) VALUES
+(1, 'Carlos', 'López', '1999-10-22'),
+(2, 'María', 'Rodríguez', '2001-03-08');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `inscripcion`
+-- Estructura de tabla para la tabla `inscripcion`
 --
 
 CREATE TABLE `inscripcion` (
@@ -57,23 +77,23 @@ CREATE TABLE `inscripcion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `curso`
+-- Indices de la tabla `curso`
 --
 ALTER TABLE `curso`
   ADD PRIMARY KEY (`ID_Curso`);
 
 --
--- Indexes for table `estudiante`
+-- Indices de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
   ADD PRIMARY KEY (`ID_Std`);
 
 --
--- Indexes for table `inscripcion`
+-- Indices de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
   ADD PRIMARY KEY (`ID_Inscripcion`),
@@ -81,33 +101,33 @@ ALTER TABLE `inscripcion`
   ADD KEY `ID_Curso` (`ID_Curso`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `curso`
+-- AUTO_INCREMENT de la tabla `curso`
 --
 ALTER TABLE `curso`
-  MODIFY `ID_Curso` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Curso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `estudiante`
+-- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `ID_Std` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Std` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `inscripcion`
+-- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  MODIFY `ID_Inscripcion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Inscripcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `inscripcion`
+-- Filtros para la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
   ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`ID_Std`) REFERENCES `estudiante` (`ID_Std`),
